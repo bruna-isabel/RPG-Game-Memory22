@@ -3,7 +3,8 @@
 #include "textures.h"
 #include "gameObject.h"
 
-gameObject* player;
+GameObject* player;
+GameObject* enemy;
 SDL_Event Game::event;
 Game::Game()
 {}
@@ -40,7 +41,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 
-	player = new gameObject("player.png", renderer, 0 , 0);
+	player = new GameObject("player.png", renderer, 10 , 10, 10,  10, 2);
+	enemy = new GameObject("enemy.png", renderer, 10, 10, 10, 10, 2);
+	for (std::vector<GameObject *>::iterator it = GameObject::allEntities.begin(); it != GameObject::allEntities.end(); it++) {
+		int hp = (*it)->getCurrentHp();
+		std::cout << hp << std::endl;
+	}
+	std::cout << typeid(GameObject::allEntities[0]).name() << std::endl;
 }
 
 void Game::handleEvents()
@@ -67,6 +74,11 @@ void Game::handleEvents()
 		case SDLK_a:
 			player->movement("y", false);
 			break;
+		case SDLK_k:
+			player->attack();
+			std::cout << enemy->getCurrentHp() << std::endl;
+			break;
+
 		}
 	default:
 		break;
@@ -75,13 +87,21 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	
 	player->update();
+	
+	enemy->update();
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	player->Render();
+	if ((player->getCurrentHp()) > 0) {
+		player->Render();
+	}
+	if ((enemy->getCurrentHp()) > 0) {
+		enemy->Render();
+	}
 	SDL_RenderPresent(renderer);
 
 }
