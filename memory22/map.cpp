@@ -1,4 +1,4 @@
-#include "map.hpp"
+#include "map.h"
 #include "textures.h"
 
 int field[32][32] = {

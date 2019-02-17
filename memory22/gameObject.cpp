@@ -17,6 +17,11 @@ GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int xx, int 
 	changeStrength(_strength);
 	x = xx;
 	y = yy;
+
+	srcRect.x = 0;
+	srcRect.h = 32;
+	srcRect.w = 32;
+	srcRect.y = 0;
 }
 
 GameObject::~GameObject()
@@ -26,11 +31,7 @@ GameObject::~GameObject()
 
 void GameObject::update()
 {
-
-	srcRect.h = 48;
-	srcRect.w = 48;
-	srcRect.x = 0;
-	srcRect.y = 0;
+	
 	
 
 	destRect.x = x;

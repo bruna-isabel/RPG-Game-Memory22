@@ -2,12 +2,12 @@
 #include <iostream>
 #include "textures.h"
 #include "gameObject.h"
-#include "map.hpp"
+#include "map.h"
 
 GameObject* player;
 GameObject* enemy;
 SDL_Event Game::event;
-map* map1; //creates map1 objecy
+map* map1; //creates map1 object pointer
 
 
 
@@ -35,7 +35,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		renderer = SDL_CreateRenderer(window, -1, 0);
 		if (renderer) 
 		{
-			SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+			//L_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 			std::cout << "Renderer Created" << std::endl;
 			
 		}
@@ -46,11 +46,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 
-	player = new GameObject("player.png", renderer, 10 , 10, 10,  10, 2);
-	enemy = new GameObject("enemy.png", renderer, 10, 10, 10, 10, 2);
+	player = new GameObject("player.png", renderer, 200 , 200, 10,  10, 2);
+	enemy = new GameObject("enemy.png", renderer, 500, 500, 10, 10, 2);
     
 	for (std::vector<GameObject *>::iterator it = GameObject::allEntities.begin(); it != GameObject::allEntities.end(); it++) {
 		int hp = (*it)->getCurrentHp();
+		
 		std::cout << hp << std::endl;
 	}
 	std::cout << typeid(GameObject::allEntities[0]).name() << std::endl;
@@ -83,7 +84,9 @@ void Game::handleEvents()
 			break;
 		case SDLK_k:
 			player->attack();
-			std::cout << enemy->getCurrentHp() << std::endl;
+			if (enemy->getCurrentHp() >0) {
+				std::cout << enemy->getCurrentHp() << std::endl;
+			}
 			break;
 
 		}
@@ -110,7 +113,7 @@ void Game::render()
 	if ((enemy->getCurrentHp()) > 0) {
 		enemy->Render();
 	}
-    map1->drawMap(renderer); //draws map1 object
+    
     SDL_RenderPresent(renderer);
     
 

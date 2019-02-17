@@ -1,9 +1,9 @@
-//#include "SDL.h"
+
 #pragma once
+#include "SDL.h"
 #include <stdio.h>
-//#include "SDL_image.h"
-#include "SDL2_image/SDL_image.h"
-#include "SDL2/SDL.h"
+#include "SDL_image.h"
+
 
 class Game {
 

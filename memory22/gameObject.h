@@ -1,16 +1,15 @@
 #pragma once
-//#include "SDL.h"
+#include "SDL.h"
 #include <stdio.h>
-//#include "SDL_image.h"
+#include "SDL_image.h"
 #include <vector>
-#include "SDL2_image/SDL_image.h"
-#include "SDL2/SDL.h"
+
 #include "game.h"
 
 class GameObject {
 
 public:
-	GameObject(const char* texturesheet, SDL_Renderer* renderer, int x, int y, int _maxHp, int _currentHp, int _strength);
+	GameObject(const char* texturesheet, SDL_Renderer* ren, int x, int y, int _maxHp, int _currentHp, int _strength);
 	~GameObject();
 
 
@@ -28,7 +27,23 @@ public:
 	void attack();
 	int getX() { return x; };
 	int getY() { return y; };
-	void setDirectionFacing(char direction) { directionFacing = direction; };
+	void setDirectionFacing(char direction) 
+	{ 
+		directionFacing = direction;
+		if (directionFacing == 'w') {
+			srcRect.x = 0;
+		}
+		else if (directionFacing == 's') {
+			srcRect.x = 32;
+		}
+		else if (directionFacing == 'd') {
+			srcRect.x = 64;
+		}
+		else if (directionFacing == 'a') {
+			srcRect.x = 96;
+		}
+	
+	};
 	char getDirectionFacing() { return directionFacing; };
     
 private:

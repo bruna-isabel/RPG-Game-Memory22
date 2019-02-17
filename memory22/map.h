@@ -20,7 +20,7 @@ private:
     SDL_Texture* grass;
     SDL_Texture* water;
     
-    int Map[32][32];
+	int Map[32][32];
     
 };
 #endif /* map_hpp */
