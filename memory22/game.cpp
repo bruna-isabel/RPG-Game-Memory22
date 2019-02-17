@@ -2,10 +2,15 @@
 #include <iostream>
 #include "textures.h"
 #include "gameObject.h"
+#include "map.hpp"
 
 GameObject* player;
 GameObject* enemy;
 SDL_Event Game::event;
+map* map1; //creates map1 objecy
+
+
+
 Game::Game()
 {}
 
@@ -43,11 +48,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	player = new GameObject("player.png", renderer, 10 , 10, 10,  10, 2);
 	enemy = new GameObject("enemy.png", renderer, 10, 10, 10, 10, 2);
+    
 	for (std::vector<GameObject *>::iterator it = GameObject::allEntities.begin(); it != GameObject::allEntities.end(); it++) {
 		int hp = (*it)->getCurrentHp();
 		std::cout << hp << std::endl;
 	}
 	std::cout << typeid(GameObject::allEntities[0]).name() << std::endl;
+    map1 = new map(renderer); //creates first map object
 }
 
 void Game::handleEvents()
@@ -96,13 +103,16 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-	if ((player->getCurrentHp()) > 0) {
+    map1->drawMap(renderer); //draws map1 object
+    if ((player->getCurrentHp()) > 0) {
 		player->Render();
 	}
 	if ((enemy->getCurrentHp()) > 0) {
 		enemy->Render();
 	}
-	SDL_RenderPresent(renderer);
+    map1->drawMap(renderer); //draws map1 object
+    SDL_RenderPresent(renderer);
+    
 
 }
 void Game::clean()

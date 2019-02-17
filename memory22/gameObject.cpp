@@ -1,20 +1,24 @@
 #include "gameObject.h"
 #include "textures.h"
+#include "game.h"
 #include <math.h>
 #include <iostream>
 #include <vector>
+
 std::vector<GameObject *> GameObject::allEntities;
+
 GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int xx, int yy, int _maxHp, int _currentHp, int _strength)
 {
 	allEntities.push_back(this);
 	renderer = ren;
-	objectTexture = textureCreator::loadTexture(texturesheet, ren);
+	objectTexture = textureCreator::loadTexture(texturesheet, ren); //used to be ren
 	maxHp = _maxHp;
 	currentHp = _currentHp;
 	changeStrength(_strength);
 	x = xx;
 	y = yy;
 }
+
 GameObject::~GameObject()
 {
 	
@@ -22,8 +26,6 @@ GameObject::~GameObject()
 
 void GameObject::update()
 {
-
-
 
 	srcRect.h = 48;
 	srcRect.w = 48;
@@ -46,24 +48,25 @@ void GameObject::movement(const char* coord, bool positive)
 		setDirectionFacing('w');
 
 	};
+    
 	if (coord == "x" && positive == false) 
 	{ 
 		y += 4; 
 		setDirectionFacing('s');
 
 	};
+    
 	if (coord == "y" && positive == true) 
 	{ 
 		x += 4;
 		setDirectionFacing('d');
 
 	};
+    
 	if (coord == "y" && positive == false) 
 	{ 
 		x -= 4; 
 		setDirectionFacing('a');
-
-	
 	};
 	
 

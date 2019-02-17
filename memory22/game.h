@@ -1,6 +1,10 @@
-#include "SDL.h"
+//#include "SDL.h"
+#pragma once
 #include <stdio.h>
-#include "SDL_image.h"
+//#include "SDL_image.h"
+#include "SDL2_image/SDL_image.h"
+#include "SDL2/SDL.h"
+
 class Game {
 
 public:
@@ -21,7 +25,7 @@ public:
 	{ return isRunning; };
 
 	static SDL_Event event;
-
+    
 private:
 	int counter;
 	bool isRunning;
