@@ -1,7 +1,10 @@
 #pragma once
-#include "SDL.h"
+#include "SDL2/SDL.h"
+// #include "SDL.h"
+// #include "SDL_image.h"
 #include <stdio.h>
-#include "SDL_image.h"
+#include "SDL2_image/SDL_image.h"
+
 #include <vector>
 
 #include "game.h"
