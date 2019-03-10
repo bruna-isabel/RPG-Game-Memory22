@@ -1,0 +1,36 @@
+CREATE TABLE Player (Name VARCHAR (15) PRIMARY KEY NOT NULL,  MaxHealth NUMBER (50) NOT NULL, CurrentHealth NUMBER (50) NOT NULL,  Strength NUMBER (50) NOT NULL,  XCoordinate NUMBER (1000)   NOT NULL,  YCoordinate NUMBER (1000)   NOT NULL );
+CREATE TABLE Monsters ( MonsterID VARCHAR (10) PRIMARY KEY NOT NULL, MonsterName VARCHAR (20) NOT NULL, Attack NUMBER (50)  NOT NULL, Health NUMBER (50)  NOT NULL );
+CREATE TABLE Items (ItemID VARCHAR (10) PRIMARY KEY NOT NULL, ItemName VARCHAR (20) NOT NULL, Attack NUMBER (50), HealthOrArmor NUMBER (50), Grade VARCHAR (10) );
+CREATE TABLE Npc (NpcID VARCHAR (10)  PRIMARY KEY NOT NULL, NpcName VARCHAR (15) NOT NULL, NpcPositionMaybe NUMBER (1000) NOT NULL );
+CREATE TABLE Inventory (ItemID VARCHAR (10) PRIMARY KEY NOT NULL, PlayerName VARCHAR (15) NOT NULL, PositionInInventory  NUMBER (100) NOT NULL );
+CREATE TABLE Quest (QuestID VARCHAR (10) PRIMARY KEY NOT NULL, QuestName VARCHAR (40) NOT NULL, NpcIdForKey VARCHAR (10) NOT NULL, InProgress  VARCHAR (3)  NOT NULL );
+
+
+
+INSERT INTO Player VALUES('Snothy', 10, 10, 2, 200, 200);
+
+
+INSERT INTO Monsters VALUES('0001', 'Goblin', 5, 20);
+INSERT INTO Monsters VALUES('0002', 'Gryffin', 10, 10);
+INSERT INTO Monsters VALUES('0003', 'Worm', 1, 1);
+INSERT INTO Monsters VALUES('0004', 'Lion', 20, 50);
+
+
+
+INSERT INTO Items VALUES('001', 'Sword', 10, NULL , 'Advanced');
+INSERT INTO Items VALUES('002', 'Bow', 15, NULL , 'Special');
+INSERT INTO Items VALUES('003', 'Helmet', NULL , 15, 'Advanced');
+INSERT INTO Items VALUES('004', 'Armor', NULL , 30, 'Artifact');
+
+
+INSERT INTO Npc VALUES('01', 'Alfred', 69);
+INSERT INTO Npc VALUES('02', 'Zyra', 360);
+INSERT INTO Npc VALUES('03', 'Macaron', 420);
+
+
+INSERT INTO Inventory VALUES('001', 'Snothy', 2);
+INSERT INTO Inventory VALUES('004', 'Snothy', 4);
+
+
+INSERT INTO Quest VALUES('1', 'The Hunt Is On', '01', 'Yes');
+INSERT INTO Quest VALUES('2', 'The way of the warrior', '03', 'No');

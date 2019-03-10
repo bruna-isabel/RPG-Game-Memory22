@@ -1,11 +1,14 @@
 #include "game.h"
 #include <iostream>
 #include "textures.h"
+#include "database.h"
+#include <map>
 #include "gameObject.h"
 #include "map.h"
 
 GameObject* player;
 GameObject* enemy;
+Database *database;
 SDL_Event Game::event;
 map* map1; //creates map1 object pointer
 
@@ -46,7 +49,20 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		isRunning = false;
 	}
 
-	player = new GameObject("player.png", renderer, 200 , 200, 10,  10, 2);
+	database = new Database("Database");
+	database->presetGameData();
+
+	//Obtaining Player Data from Database
+	std::map < std::string, std::string> playerData;
+	playerData = database->selectQuery("player");
+	int pCurrentHealth = std::stoi(playerData["CurrentHealth"]);
+	int pMaxHealth = std::stoi(playerData["MaxHealth"]);
+	int pStrength = std::stoi(playerData["Strength"]);
+	int pXCor = std::stoi(playerData["XCoordinate"]);
+	int pYCor = std::stoi(playerData["XCoordinate"]);
+	std::string name = playerData["Name"];
+
+	player = new GameObject("player.png", renderer, pXCor, pYCor, pMaxHealth, pCurrentHealth, pStrength);
 	enemy = new GameObject("enemy.png", renderer, 500, 500, 10, 10, 2);
     
 	for (std::vector<GameObject *>::iterator it = GameObject::allEntities.begin(); it != GameObject::allEntities.end(); it++) {
