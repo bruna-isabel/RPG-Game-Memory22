@@ -38,7 +38,7 @@ int field[32][32] = {
 
 map::map(SDL_Renderer* ren)
 {
-    grass = textureCreator::loadTexture("mossover.png", ren);
+    grass = textureCreator::loadTexture("kewlStuffs/mossover.png", ren);
     
     loadMap(field);
     

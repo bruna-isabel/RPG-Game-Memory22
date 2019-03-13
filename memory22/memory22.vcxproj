@@ -142,6 +142,7 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
+    <ClCompile Include="startMenu.cpp" />
     <ClCompile Include="textures.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="startMenu.h" />
     <ClInclude Include="textures.h" />
   </ItemGroup>
   <ItemGroup>

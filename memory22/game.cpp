@@ -2,6 +2,7 @@
 #include <iostream>
 #include "textures.h"
 #include "database.h"
+#include "startMenu.h"
 #include <map>
 #include "gameObject.h"
 #include "map.h"
@@ -9,6 +10,7 @@
 GameObject* player;
 GameObject* enemy;
 Database *database;
+startMenu *menu;
 SDL_Event Game::event;
 map* map1; //creates map1 object pointer
 
@@ -42,6 +44,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 			std::cout << "Renderer Created" << std::endl;
 			
 		}
+		menu = new startMenu(window);
+		menu->menuLoop(window);
 		isRunning = true; // If everything initializes correctly makes the game loop condition true
 	}
 	else 
@@ -103,6 +107,9 @@ void Game::handleEvents()
 			if (enemy->getCurrentHp() >0) {
 				std::cout << enemy->getCurrentHp() << std::endl;
 			}
+			break;
+		case SDLK_ESCAPE:
+			menu->menuLoop(window);
 			break;
 
 		}

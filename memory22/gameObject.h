@@ -58,7 +58,6 @@ private:
 	int currentHp;
 	char directionFacing;
 
-
 	SDL_Texture* objectTexture;
 	SDL_Rect srcRect, destRect;
 	SDL_Renderer* renderer;
