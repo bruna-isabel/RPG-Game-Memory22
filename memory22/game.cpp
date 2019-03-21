@@ -129,7 +129,8 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-    map1->drawMap(renderer); //draws map1 object
+        map1->drawMap(renderer, "field.txt"); //draws map1 object
+
     if ((player->getCurrentHp()) > 0) {
 		player->Render();
 	}
