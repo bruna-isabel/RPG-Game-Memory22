@@ -9,6 +9,8 @@
 
 GameObject* player;
 GameObject* enemy;
+GameObject* bmario;
+GameObject* pikachu;
 Database *database;
 startMenu *menu;
 SDL_Event Game::event;
