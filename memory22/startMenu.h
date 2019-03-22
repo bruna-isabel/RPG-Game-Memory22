@@ -1,7 +1,6 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
-#include "database.h"
 //Learned SDL2 from http://lazyfoo.net/tutorials/SDL/index.php
 class startMenu 
 {
@@ -30,7 +29,7 @@ class startMenu
     ~startMenu();
     SDL_Surface* loadSurface( std::string path );
     void render();
-    bool menuLoop(SDL_Window *window, Database *db);
+    bool menuLoop(SDL_Window *window);
 
 
 

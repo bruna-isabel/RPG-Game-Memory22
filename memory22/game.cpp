@@ -47,7 +47,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 			
 		}
 		menu = new startMenu(window);
-		menu->menuLoop(window, database);
+		menu->menuLoop(window);
 		isRunning = true; // If everything initializes correctly makes the game loop condition true
 	}
 	else 
@@ -121,7 +121,7 @@ void Game::handleEvents()
 			}
 			break;
 		case SDLK_ESCAPE:
-			if(!menu->menuLoop(window, database))
+			if(!menu->menuLoop(window))
 			{
 				isRunning = false;
 			}
@@ -144,7 +144,7 @@ void Game::update()
 
 	pikachu->update();
 }
-}
+
 
 void Game::render()
 {

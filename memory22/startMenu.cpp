@@ -35,7 +35,7 @@ void startMenu::render()
 
 
 
-bool startMenu::menuLoop(SDL_Window *window, Database *db)
+bool startMenu::menuLoop(SDL_Window *window)
 {
 	render();
 	quit = false;
@@ -89,8 +89,8 @@ bool startMenu::menuLoop(SDL_Window *window, Database *db)
 					else if (index == 1)
 					{
 						std::cout << "New Game" << std::endl;
-						db->deleteData();
-						db->presetGameData();
+						//db->deleteData();
+						//db->presetGameData();
 						quit = true;
 						break;
 					}
@@ -114,6 +114,7 @@ bool startMenu::menuLoop(SDL_Window *window, Database *db)
 
 		//Update the surface
 		SDL_UpdateWindowSurface(window);
-		return quit;
+		
 	}
+	return quit;
 }
