@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include <stdio.h>
 #include "game.h"
+// #include"text.h"
 
 
 Game *game = nullptr;
@@ -18,13 +19,15 @@ int main(int argc, char* argv[]) {
 
 	game = new Game();
 	game->init("Memory 22", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
-
+	// Text text(Game::renderer, "kewlStuffs/arial.ttf", 30, "Welcome to Memory 22!", { 255, 0, 0, 255 });
+	
 	while (game->running()) 
 	{
 		frameBegin = SDL_GetTicks();
 		game->handleEvents();
 		game->update();
 		game->render();
+		// text.display(20, 20, Game::renderer);
 		frameTime =  SDL_GetTicks() - frameBegin;
 
 		if (frameTime < frameDelay)
