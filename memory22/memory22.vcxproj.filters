@@ -36,6 +36,9 @@
     <ClCompile Include="startMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h">
@@ -56,12 +59,21 @@
     <ClInclude Include="startMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="enemy.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="player.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="kewlStuffs\bmario.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="kewlStuffs\pikachu.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

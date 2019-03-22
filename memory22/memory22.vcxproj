@@ -143,6 +143,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="startMenu.cpp" />
+    <ClCompile Include="text.cpp" />
     <ClCompile Include="textures.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,10 +152,13 @@
     <ClInclude Include="gameObject.h" />
     <ClInclude Include="map.h" />
     <ClInclude Include="startMenu.h" />
+    <ClInclude Include="text.h" />
     <ClInclude Include="textures.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="enemy.png" />
+    <Image Include="kewlStuffs\bmario.png" />
+    <Image Include="kewlStuffs\pikachu.png" />
     <Image Include="player.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
