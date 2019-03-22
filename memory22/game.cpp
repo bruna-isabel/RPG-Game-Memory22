@@ -65,6 +65,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	int pXCor = std::stoi(playerData["XCoordinate"]);
 	int pYCor = std::stoi(playerData["XCoordinate"]);
 	std::string name = playerData["Name"];
+	
+	//Text initialization error
+	if (TTF_Init() == -1)
+	{
+		std::cerr << "Failed to initialize SDL_ttf.\n";
+
+	}
 
 	player = new GameObject("player.png", renderer, pXCor, pYCor, pMaxHealth, pCurrentHealth, pStrength);
 	enemy = new GameObject("enemy.png", renderer, 500, 500, 10, 10, 2);
