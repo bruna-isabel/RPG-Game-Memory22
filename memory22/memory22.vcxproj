@@ -98,7 +98,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\Victor\source\SDL2-2.0.9\lib\x64;C:\Users\Victor\source\SDL2_image-2.0.4\lib\x64;C:\Users\Victor\source\repos\memory-22-xD\memory22;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_Image.lib;sqlite3.lib;SDL2_tff.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_Image.lib;sqlite3.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
