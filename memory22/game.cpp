@@ -68,7 +68,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	player = new GameObject("player.png", renderer, pXCor, pYCor, pMaxHealth, pCurrentHealth, pStrength);
 	enemy = new GameObject("enemy.png", renderer, 500, 500, 10, 10, 2);
-    
+    	// Adding two NPCs
+	bmario = new GameObject("kewlStuffs/bmario.png", renderer, 400, 400, 999, 999, 999);
+	pikachu = new GameObject("kewlStuffs/pikachu.png", renderer, 100, 200, 999, 999, 999);
+	
 	for (std::vector<GameObject *>::iterator it = GameObject::allEntities.begin(); it != GameObject::allEntities.end(); it++) {
 		int hp = (*it)->getCurrentHp();
 		
@@ -127,6 +130,11 @@ void Game::update()
 	player->update();
 	
 	enemy->update();
+	
+	bmario->update();
+
+	pikachu->update();
+}
 }
 
 void Game::render()
@@ -140,6 +148,12 @@ void Game::render()
 	if ((enemy->getCurrentHp()) > 0) {
 		enemy->Render();
 	}
+        if ((bmario->getCurrentHp()) > 0) {
+		bmario->Render();
+	}
+
+	pikachu->Render();	
+
     
     SDL_RenderPresent(renderer);
     
