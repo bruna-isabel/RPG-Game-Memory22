@@ -30,6 +30,11 @@ public:
 	void attack();
 	int getX() { return x; };
 	int getY() { return y; };
+	//written by petar
+	void setX(int xcor);
+	void setY(int ycor);
+	void setStr(int str);
+	//written by petar
 	void setDirectionFacing(char direction) 
 	{ 
 		directionFacing = direction;

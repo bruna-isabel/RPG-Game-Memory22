@@ -1,7 +1,6 @@
 #include "game.h"
 #include <iostream>
 #include "textures.h"
-#include "database.h"
 #include "startMenu.h"
 #include <map>
 #include "gameObject.h"
@@ -47,7 +46,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 			
 		}
 		menu = new startMenu(window);
-		menu->menuLoop(window);
+		menu->render();
+		menu->menuLoop(window, database);
 		isRunning = true; // If everything initializes correctly makes the game loop condition true
 	}
 	else 
@@ -56,7 +56,6 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	}
 
 	database = new Database("Database");
-	database->presetGameData();
 
 	//Obtaining Player Data from Database
 	std::map < std::string, std::string> playerData;
@@ -65,7 +64,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	int pMaxHealth = std::stoi(playerData["MaxHealth"]);
 	int pStrength = std::stoi(playerData["Strength"]);
 	int pXCor = std::stoi(playerData["XCoordinate"]);
-	int pYCor = std::stoi(playerData["XCoordinate"]);
+	int pYCor = std::stoi(playerData["YCoordinate"]);
 	std::string name = playerData["Name"];
 	
 	
@@ -87,7 +86,6 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 void Game::handleEvents()
 {
-
 	SDL_PollEvent(&event);
 	switch (event.type)
 	{
@@ -98,16 +96,20 @@ void Game::handleEvents()
 		switch (event.key.keysym.sym) 
 		{ 
 		case SDLK_w:
-			player->movement("x", true); 
+			player->movement("x", true);
+			counter = 0;
 			break;
 		case SDLK_s:
 			player->movement("x", false);
+			counter = 0;
 			break;
 		case SDLK_d:
 			player->movement("y", true);
+			counter = 0;
 			break;
 		case SDLK_a:
 			player->movement("y", false);
+			counter = 0;
 			break;
 		case SDLK_k:
 			player->attack();
@@ -116,9 +118,44 @@ void Game::handleEvents()
 			}
 			break;
 		case SDLK_ESCAPE:
-			if(!menu->menuLoop(window))
+			if (counter == 0)
 			{
-				isRunning = false;
+				counter++;
+				int menuint = menu->menuLoop(window, database);
+				if(menuint == 3)
+				{
+					//Quitting
+					isRunning = false;
+					break;
+				}
+				else if(menuint == 2 )
+				{
+					//Saving player data
+					database->query("UPDATE Player SET XCoordinate =" + std::to_string(player->getX()) + " WHERE Name = 'Snothy';");
+					std::cout << "UPDATE Player SET XCoordinate = " + std::to_string(player->getX()) + " WHERE Name = 'Snothy';" << std::endl;
+					database->query("UPDATE Player SET YCoordinate =" + std::to_string(player->getY()) + " WHERE Name = 'Snothy';");
+					database->query("UPDATE Player SET CurrentHealth =" + std::to_string(player->getCurrentHp()) + " WHERE Name = 'Snothy'");
+					database->query("UPDATE Player SET Strength =" + std::to_string(player->getStrength()) + " WHERE Name = 'Snothy';");
+					//Saving inventory data, questing data
+					//...
+				}
+				else if(menuint == 1)
+				{
+					//Creating new game
+					database->deleteData();
+					database->presetGameData();
+					std::map < std::string, std::string> playerData;
+					//Setting preset player data
+					playerData = database->selectQuery("player");
+					player->setCurrentHp(std::stoi(playerData["CurrentHealth"]));
+					player->setX(std::stoi(playerData["XCoordinate"]));
+					player->setY(std::stoi(playerData["YCoordinate"]));
+					player->setStr(std::stoi(playerData["Strength"]));
+					//Clean inventory
+					//...
+					
+				}
+				
 			}
 			break;
 
@@ -144,7 +181,7 @@ void Game::update()
 void Game::render()
 {
 	SDL_RenderClear(renderer);
-        map1->drawMap(renderer, "field.txt"); //draws map1 object
+        map1->drawMap(renderer); //draws map1 object
 
     if ((player->getCurrentHp()) > 0) {
 		player->Render();

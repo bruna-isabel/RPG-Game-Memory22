@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
+#include "database.h"
 //Learned SDL2 from http://lazyfoo.net/tutorials/SDL/index.php
 class startMenu 
 {
@@ -22,6 +23,7 @@ class startMenu
     const int SCREEN_WIDTH = 1024;
     const int SCREEN_HEIGHT = 720;
 	bool quit;
+	int gameCounter;
     int index = 0;
     
 
@@ -29,7 +31,7 @@ class startMenu
     ~startMenu();
     SDL_Surface* loadSurface( std::string path );
     void render();
-    bool menuLoop(SDL_Window *window);
+    int menuLoop(SDL_Window *window, Database *db);
 
 
 

@@ -1,5 +1,6 @@
 #include "startMenu.h"
 #include <iostream>
+#include "game.h"
 
 
 startMenu::startMenu(SDL_Window *window)
@@ -35,9 +36,9 @@ void startMenu::render()
 
 
 
-bool startMenu::menuLoop(SDL_Window *window)
+int startMenu::menuLoop(SDL_Window *window, Database *db)
 {
-	render();
+	int result = 0;
 	quit = false;
 	SDL_Event e;
 	gCurrentSurface = gKeyPressSurfaces[continueGame];
@@ -84,7 +85,8 @@ bool startMenu::menuLoop(SDL_Window *window)
 					{
 						std::cout << "Continue" << std::endl;
 						quit = true;
-						break;
+						result = 0;
+						
 					}
 					else if (index == 1)
 					{
@@ -92,6 +94,7 @@ bool startMenu::menuLoop(SDL_Window *window)
 						//db->deleteData();
 						//db->presetGameData();
 						quit = true;
+						result = 1;
 						break;
 					}
 					else if (index == 2)
@@ -99,12 +102,14 @@ bool startMenu::menuLoop(SDL_Window *window)
 						std::cout << "Save Game" << std::endl;
 						//insert items and quests into respective tables
 						quit = true;
+						result = 2;
 						break;
 					}
 					else if (index == 3)
 					{
 						std::cout << "Exit" << std::endl;
 						quit = true;
+						result = 3;
 						break;
 					}
 				}
@@ -116,5 +121,11 @@ bool startMenu::menuLoop(SDL_Window *window)
 		SDL_UpdateWindowSurface(window);
 		
 	}
-	return quit;
+	if(index == 3)
+	{
+		index = 0;
+		return result;
+	}
+	index = 0;
+	return result;
 }

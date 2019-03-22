@@ -90,6 +90,12 @@ int GameObject::getStrength() { return strength; }
 
 void GameObject::changeStrength(int change) { strength += change; }
 
+//methods by petar for database implementation
+void GameObject::setX(int xcor) { x = xcor; }
+void GameObject::setY(int ycor) { y = ycor; }
+void GameObject::setStr(int str) { strength = str; }
+//methods by petar for database implementation
+
 void GameObject::attack() 
 {
 	for (std::vector<GameObject *>::iterator it = allEntities.begin(); it != allEntities.end(); it++)
