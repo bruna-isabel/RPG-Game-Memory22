@@ -4,16 +4,14 @@
 
 startMenu::startMenu(SDL_Window *window)
 {
-    //SDL_Init( SDL_INIT_VIDEO );
-	//gWindow = SDL_CreateWindow( "menu", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 	gScreenSurface = SDL_GetWindowSurface( window );
 }
 
 
 startMenu::~startMenu()
 {
-	SDL_DestroyWindow( gWindow );
-	SDL_Quit();
+	//SDL_DestroyWindow( window );
+	//SDL_Quit();
 }
 
 
@@ -37,79 +35,85 @@ void startMenu::render()
 
 
 
-void startMenu::menuLoop(SDL_Window *window)
+bool startMenu::menuLoop(SDL_Window *window, Database *db)
 {
-    render();
-	bool quit = false;
+	render();
+	quit = false;
 	SDL_Event e;
-	gCurrentSurface = gKeyPressSurfaces[ continueGame ];
-	while( !quit )
+	gCurrentSurface = gKeyPressSurfaces[continueGame];
+	while (!quit)
 	{
-		while( SDL_PollEvent( &e ) != 0 )
+		while (SDL_PollEvent(&e) != 0)
 		{
-			if( e.type == SDL_QUIT )
+			if (e.type == SDL_QUIT)
 			{
 				quit = true;
 			}
-			else if( e.type == SDL_KEYDOWN )
+			else if (e.type == SDL_KEYDOWN)
 			{
-				switch( e.key.keysym.sym )
+				switch (e.key.keysym.sym)
 				{
-					case SDLK_w:
-                    if (index == 0)
-                    {
-                        index = 3 ;
-                    }
-                    else
-                    {
-                        index = index - 1 ;
-                    }
-                    //std::cout<<index<<std::endl;
-                    gCurrentSurface = gKeyPressSurfaces[index];
+				case SDLK_w:
+					if (index == 0)
+					{
+						index = 3;
+					}
+					else
+					{
+						index = index - 1;
+					}
+					//std::cout<<index<<std::endl;
+					gCurrentSurface = gKeyPressSurfaces[index];
 					break;
 
-					case SDLK_s:
-                    if(index == 3)
-                    {
-                        index = 0;
-                    }
-                    else
-                    {
-                        index = index + 1;
-                    }
-                    //std::cout<<index<<std::endl;
-                    gCurrentSurface = gKeyPressSurfaces[index];
+				case SDLK_s:
+					if (index == 3)
+					{
+						index = 0;
+					}
+					else
+					{
+						index = index + 1;
+					}
+					//std::cout<<index<<std::endl;
+					gCurrentSurface = gKeyPressSurfaces[index];
 					break;
 
-                    case SDLK_RETURN:
-                    if(index == 0)
-                    {
-                        std::cout<<"Continue"<<std::endl;
-                        quit = true;
-                        break;
-                    }
-                    else if(index == 1)
-                    {
-                        std::cout<<"New Game"<<std::endl;
-                        break;
-                    }
-                    else if(index == 2)
-                    {
-                        std::cout<<"Save Game"<<std::endl;
-                        break;
-                    }
-                    else if(index == 3)
-                    {
-                        std::cout<<"Exit"<<std::endl;
-                        break;
-                    }
+				case SDLK_RETURN:
+					if (index == 0)
+					{
+						std::cout << "Continue" << std::endl;
+						quit = true;
+						break;
+					}
+					else if (index == 1)
+					{
+						std::cout << "New Game" << std::endl;
+						db->deleteData();
+						db->presetGameData();
+						quit = true;
+						break;
+					}
+					else if (index == 2)
+					{
+						std::cout << "Save Game" << std::endl;
+						//insert items and quests into respective tables
+						quit = true;
+						break;
+					}
+					else if (index == 3)
+					{
+						std::cout << "Exit" << std::endl;
+						quit = true;
+						break;
+					}
 				}
 			}
 		}
-		SDL_BlitSurface( gCurrentSurface, NULL, gScreenSurface, NULL );
+		SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
 
 		//Update the surface
-		SDL_UpdateWindowSurface(window );
-		
+		SDL_UpdateWindowSurface(window);
+		return quit;
 	}
 }

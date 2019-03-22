@@ -45,7 +45,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 			
 		}
 		menu = new startMenu(window);
-		menu->menuLoop(window);
+		menu->menuLoop(window, database);
 		isRunning = true; // If everything initializes correctly makes the game loop condition true
 	}
 	else 
@@ -109,7 +109,10 @@ void Game::handleEvents()
 			}
 			break;
 		case SDLK_ESCAPE:
-			menu->menuLoop(window);
+			if(!menu->menuLoop(window, database))
+			{
+				isRunning = false;
+			}
 			break;
 
 		}

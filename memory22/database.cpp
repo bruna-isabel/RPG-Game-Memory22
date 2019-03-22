@@ -19,13 +19,6 @@ Database::Database(std::string DatabaseFileName)
 Database::~Database()
 {
     sqlite3_close(db);
-    //query("DROP TABLE Player;");
-    //query("DROP TABLE Monsters;");
-    //query("DROP TABLE NPC;");
-    //query("DROP TABLE Items;");
-    //query("DROP TABLE Quest;");
-    //query("DROP TABLE Inventory;");
-    //drop all tables
 }
 
 
@@ -125,6 +118,17 @@ void Database::presetGameData()
         query(command);
     }
     gameDataSQL.close();
+}
+
+void Database::deleteData()
+{
+	//drop all tables
+	query("DROP TABLE Player;");
+	query("DROP TABLE Monsters;");
+	query("DROP TABLE NPC;");
+	query("DROP TABLE Items;");
+	query("DROP TABLE Quest;");
+	query("DROP TABLE Inventory;");
 }
 
 

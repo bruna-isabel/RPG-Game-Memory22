@@ -21,4 +21,5 @@ class Database
     int query(std::string commandstr);
     std::map<std::string, std::string> selectQuery(std::string tableName, std::string where = "");
     void presetGameData();
+	void deleteData();
 };
