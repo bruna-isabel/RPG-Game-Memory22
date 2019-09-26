@@ -1,7 +1,7 @@
 
 Memory22 - RPG game
 
-This was my second project of University, completed in C++. We did an RPG game, using SDL. 
+This was my second project of University, completed in C++: an RPG game, using SDL has a cross-platform development library.
 The project was built in a medieval theme and contains a main character, NPCs and enemies. 
 Our team used Kanban Flow as a form of organization and planning the tasks to be done, if they were in progress or already done. 
 I was in charge of the environment where I created objects like trees, rivers, castles and programmed a way to interact with them. 
